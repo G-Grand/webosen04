@@ -6,8 +6,8 @@
 
 
 
-
-<html Doctype>
+<!doctype html>
+<html>
 
 
 
@@ -22,51 +22,53 @@
 
 <script>
 
-(function($){       
-    jQuery.fn.lightTabs = function(options){
-        var createTabs = function(){
-            tabs = this;
-            i = 0;
-            showPage = function(i){
-                $(tabs).children("div").children("div").hide();
-                $(tabs).children("div").children("div").eq(i).show();
-                $(tabs).children("ul").children("li").removeClass("active");
-                $(tabs).children("ul").children("li").eq(i).addClass("active");
-            }
-            showPage(0);        
-            $(tabs).children("ul").children("li").each(function(index, element){
-                $(element).attr("data-page", i);
-                i++;                        
-            });
-            $(tabs).children("ul").children("li").click(function(){
-                showPage(parseInt($(this).attr("data-page")));
-            });       
-        };    
-        return this.each(createTabs);
-    };  
-})(jQuery);
-$(document).ready(function(){
-    $(".tabs").lightTabs();
-});
-$(function(){
-  $('#rotator1').rotator({fx:'slide',autorun: true, nav: true});
+    $(function () {
+        $.fn.lightTabs = function (options) {
+            var createTabs = function () {
+                tabs = this;
+                i = 0;
+                showPage = function (i) {
+                    $(tabs).children("div").children("div").hide();
+                    $(tabs).children("div").children("div").eq(i).show();
+                    $(tabs).children("ul").children("li").removeClass("active");
+                    $(tabs).children("ul").children("li").eq(i).addClass("active");
+                };
+                showPage(0);
+                $(tabs).children("ul").children("li").each(function (index, element) {
+                    $(element).attr("data-page", i);
+                    i++;
+                });
+                $(tabs).children("ul").children("li").click(function () {
+                    showPage(parseInt($(this).attr("data-page")));
+                });
+            };
+            return this.each(createTabs);
+        };
+    });
+
+    $(document).ready(function () {
+        $(".tabs").lightTabs();
+    });
+
+    $(function () {
+        $('#rotator1').rotator({fx: 'slide', autorun: true, nav: true});
         $.ajax({
-                url: "myajax.php",
-                dataType: "json",
-                method: "POST",
-                success: function(data) {
-                    console.log(data);
-                    var div = document.getElementById("five");
-                    var lis = "";
-                    for(var i=0; i<data.length; ++i) {
-                        lis += "<div style=\"background-image: url('/gallery/"+data[i].image+"')\"><a href=\"#\">"+data[i].order_status+" "+data[i].property_Type+", "+data[i].city+"  "+data[i].district+" <br/>"+data[i].floor+"-эт "+data[i].general+"кв.м.  "+data[i].price+"грн.</a> </div>";
-                    }
-                    lis +="<div style=\"clear: both; height: 1px; width:100%\"></div>";
-                    div.innerHTML = lis;
+            url: "myajax.php",
+            dataType: "json",
+            method: "POST",
+            success: function (data) {
+                console.log(data);
+                var div = document.getElementById("five");
+                var lis = "";
+                for (var i = 0; i < data.length; ++i) {
+                    lis += "<div style=\"background-image: url('/gallery/" + data[i].image + "')\"><a href=\"#\">" + data[i].order_status + " " + data[i].property_Type + ", " + data[i].city + "  " + data[i].district + " <br/>" + data[i].floor + "-эт " + data[i].general + "кв.м.  " + data[i].price + "грн.</a> </div>";
                 }
-            });
-    
-})
+                lis += "<div style=\"clear: both; height: 1px; width:100%\"></div>";
+                div.innerHTML = lis;
+            }
+        });
+
+    });
 
      </script>  
 
@@ -76,7 +78,7 @@ $(function(){
 
 <body>
 
-   
+
 
   <div class="content">
     <div class="rotator" id="rotator1"></div>
