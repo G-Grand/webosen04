@@ -6,8 +6,8 @@
 
 
 
-
-<html Doctype>
+<!doctype html>
+<html>
 
 
 
